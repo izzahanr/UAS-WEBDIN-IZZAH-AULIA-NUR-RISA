@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Variasi Pink Muda elegan (Rose/Pink palette) */
+  --color-primary-50: #fff1f2;
+  --color-primary-100: #ffe4e6;
+  --color-primary-200: #fecdd3;
+  --color-primary-300: #fda4af;
+  --color-primary-400: #fb7185;
+  --color-primary-500: #f43f5e;
+  --color-primary-600: #e11d48;
+  --color-primary-700: #be123c;
+  --color-primary-800: #9f1239;
+  --color-primary-900: #881337;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+  }
+  .glass-dark {
+    @apply bg-slate-900/70 backdrop-blur-md border border-slate-700/50 shadow-[0_8px_30px_rgb(0,0,0,0.12)];
+  }
+  
+  .glass-card {
+    @apply bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300;
+  }
+}
+
+:root {
+  --background: #f8fafc; /* Slate 50 */
+  --foreground: #0f172a; /* Slate 900 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a; /* Slate 900 */
+    --foreground: #f8fafc; /* Slate 50 */
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  /* Background gradient dengan sentuhan soft pink */
+  background-image: radial-gradient(at 0% 0%, hsla(350, 80%, 95%, 1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(350, 100%, 90%, 0.5) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339, 49%, 95%, 0.8) 0, transparent 50%);
+  background-attachment: fixed;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image: radial-gradient(at 0% 0%, hsla(350, 40%, 15%, 1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(350, 50%, 10%, 0.5) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339, 40%, 15%, 0.8) 0, transparent 50%);
+  }
+}
