@@ -1,19 +1,19 @@
-# 🎓 Sistem Informasi Inventaris Laboratorium Komputer
+Sistem Informasi Inventaris Laboratorium Komputer
 
 Proyek ini adalah tugas **UAS Pemrograman Web Dinamis**. Sistem ini dibangun dengan arsitektur **Full-Stack (Terpisah Backend & Frontend)** menggunakan arsitektur RESTful API.
 
-**Oleh:** Izzah Aulia Nur Risa (NIM: 0102523029)  
-**Program Studi:** Informatika — Universitas Al Azhar Indonesia
+**Nama:** Izzah Aulia Nur Risa (NIM: 0102523029)  
+**Program Studi:** Informatika / Universitas Al Azhar Indonesia
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## Teknologi yang Digunakan
 - **Backend**: Node.js, Express.js, TypeScript, MySQL2 (Raw Query / Prepared Statements), JSON Web Token (JWT), Multer.
 - **Frontend**: React, Next.js (App Router), Tailwind CSS v4.
 
 ---
 
-## 🚀 1. Cara Instalasi
+## 1. Cara Instalasi
 
 Pastikan komputer Anda sudah terinstal **Node.js** dan **XAMPP** (untuk MySQL).
 
@@ -39,7 +39,7 @@ Pastikan komputer Anda sudah terinstal **Node.js** dan **XAMPP** (untuk MySQL).
 
 ---
 
-## ⚙️ 2. Konfigurasi `.env`
+## 2. Konfigurasi `.env`
 
 Di dalam folder `backend/`, buat sebuah file baru bernama `.env` (atau cukup *copy-paste* file `.env.example` lalu ubah namanya menjadi `.env`).
 
@@ -61,7 +61,7 @@ JWT_SECRET=rahasia_super_aman_untuk_jwt_token_inventaris
 
 ---
 
-## 🏃‍♂️ 3. Cara Menjalankan Backend & Frontend
+##3. Cara Menjalankan Backend & Frontend
 
 Anda perlu membuka **dua terminal** terpisah di VS Code.
 
@@ -82,7 +82,7 @@ Setelah keduanya berjalan, buka browser dan akses aplikasi melalui: **http://loc
 
 ---
 
-## 🔑 4. Daftar Akun Uji Coba
+## 4. Daftar Akun Uji Coba
 
 Database sudah memiliki data bawaan (*seeder*). Silakan gunakan akun berikut untuk masuk ke dalam sistem:
 
@@ -94,7 +94,7 @@ Database sudah memiliki data bawaan (*seeder*). Silakan gunakan akun berikut unt
 
 ---
 
-## 📡 5. Daftar Endpoint API (Backend)
+## 5. Daftar Endpoint API (Backend)
 
 Seluruh request yang membutuhkan otentikasi wajib menyertakan token JWT pada *Headers*:  
 `Authorization: Bearer <token_anda>`
