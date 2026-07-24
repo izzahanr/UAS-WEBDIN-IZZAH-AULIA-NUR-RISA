@@ -5,13 +5,9 @@ Proyek ini adalah tugas **UAS Pemrograman Web Dinamis**. Sistem ini dibangun den
 **Nama:** Izzah Aulia Nur Risa (NIM: 0102523029)  
 **Program Studi:** Informatika / Universitas Al Azhar Indonesia
 
----
-
 ## Teknologi yang Digunakan
 - **Backend**: Node.js, Express.js, TypeScript, MySQL2 (Raw Query / Prepared Statements), JSON Web Token (JWT), Multer.
 - **Frontend**: React, Next.js (App Router), Tailwind CSS v4.
-
----
 
 ## 1. Cara Instalasi
 
@@ -37,7 +33,6 @@ Pastikan komputer Anda sudah terinstal **Node.js** dan **XAMPP** (untuk MySQL).
 4. Impor database:
    Buka `phpMyAdmin`, buat database bernama `inventaris_lab`, lalu impor file `database/inventaris_lab.sql`.
 
----
 
 ## 2. Konfigurasi `.env`
 
@@ -59,7 +54,6 @@ DB_NAME=inventaris_lab
 JWT_SECRET=rahasia_super_aman_untuk_jwt_token_inventaris
 ```
 
----
 
 ##3. Cara Menjalankan Backend & Frontend
 
@@ -80,7 +74,6 @@ npm run dev -- -p 3001
 
 Setelah keduanya berjalan, buka browser dan akses aplikasi melalui: **http://localhost:3001**
 
----
 
 ## 4. Daftar Akun Uji Coba
 
@@ -92,7 +85,6 @@ Database sudah memiliki data bawaan (*seeder*). Silakan gunakan akun berikut unt
 | **Operator** | `operator@inventaris.lab` | `Operator@123` | Bisa menambah/edit Barang & Kategori. Tidak bisa kelola User. |
 | **Viewer** | `viewer@inventaris.lab` | `Viewer@123` | Hanya bisa melihat data (*Read-Only*). |
 
----
 
 ## 5. Daftar Endpoint API (Backend)
 
