@@ -31,12 +31,14 @@ export default function BarangPage() {
     nama_barang: '', 
     kategori_id: '',
     kondisi: 'baik',
+    lokasi: '',
     jumlah: '1'
   });
   const [fotoFile, setFotoFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Fungsi untuk mengambil data barang dan kategori dari API Backend (Database)
   const loadData = async (currentPage = 1, searchQuery = '', katFilter = '', konFilter = '') => {
     setIsLoading(true);
     try {
@@ -69,6 +71,7 @@ export default function BarangPage() {
     }
   };
 
+  // Fungsi yang otomatis berjalan saat teks pencarian atau filter diubah (dengan jeda 0.5 detik / debounce)
   useEffect(() => {
     // Debounce search
     const delay = setTimeout(() => {
@@ -77,14 +80,16 @@ export default function BarangPage() {
     return () => clearTimeout(delay);
   }, [search, filterKategori, filterKondisi]);
 
+  // Fungsi untuk membuka form (modal) dalam mode Tambah Barang Baru
   const openCreateModal = () => {
     setModalMode('create');
-    setFormData({ kode_barang: '', nama_barang: '', kategori_id: '', kondisi: 'baik', jumlah: '1' });
+    setFormData({ kode_barang: '', nama_barang: '', kategori_id: '', kondisi: 'baik', lokasi: '', jumlah: '1' });
     setFotoFile(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
     setIsModalOpen(true);
   };
 
+  // Fungsi untuk membuka form (modal) dalam mode Edit (Ubah) Barang beserta datanya
   const openEditModal = (item: Barang) => {
     setModalMode('edit');
     setCurrentId(item.id);
@@ -93,6 +98,7 @@ export default function BarangPage() {
       nama_barang: item.nama_barang, 
       kategori_id: item.kategori_id.toString(), 
       kondisi: item.kondisi, 
+      lokasi: item.lokasi || '',
       jumlah: item.jumlah.toString() 
     });
     setFotoFile(null);
@@ -105,27 +111,41 @@ export default function BarangPage() {
     setCurrentId(null);
   };
 
+  // Fungsi yang dieksekusi saat tombol "Simpan" pada form ditekan (menambah/mengubah data ke backend)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Siapkan FormData karena kita upload file
-    const payload = new FormData();
-    payload.append('kode_barang', formData.kode_barang);
-    payload.append('nama_barang', formData.nama_barang);
-    payload.append('kategori_id', formData.kategori_id);
-    payload.append('kondisi', formData.kondisi);
-    payload.append('jumlah', formData.jumlah);
-    if (fotoFile) {
-      payload.append('foto', fotoFile);
-    }
-
     try {
+      let savedBarangId = currentId;
+
+      const jsonData = {
+        kode_barang: formData.kode_barang,
+        nama_barang: formData.nama_barang,
+        kategori_id: parseInt(formData.kategori_id, 10),
+        kondisi: formData.kondisi,
+        lokasi: formData.lokasi,
+        jumlah: parseInt(formData.jumlah, 10)
+      };
+
       if (modalMode === 'create') {
-        await fetchApi('/api/barang', { data: payload });
+        const res = await fetchApi<ApiResponse<Barang>>('/api/barang', { data: jsonData });
+        if (res.data) {
+          savedBarangId = res.data.id;
+        }
       } else if (modalMode === 'edit' && currentId) {
-        await fetchApi(`/api/barang/${currentId}`, { data: payload, method: 'PUT' });
+        await fetchApi(`/api/barang/${currentId}`, { data: jsonData, method: 'PUT' });
       }
+
+      if (fotoFile && savedBarangId) {
+        const uploadPayload = new FormData();
+        uploadPayload.append('foto', fotoFile);
+        await fetchApi(`/api/barang/${savedBarangId}/upload`, { 
+          data: uploadPayload, 
+          method: 'POST' 
+        });
+      }
+
       closeModal();
       loadData(page, search, filterKategori, filterKondisi);
     } catch (err: any) {
@@ -135,6 +155,7 @@ export default function BarangPage() {
     }
   };
 
+  // Fungsi yang dieksekusi saat tombol Hapus (logo tempat sampah) ditekan (mengirim perintah hapus ke backend)
   const handleDelete = async (id: number) => {
     if (!confirm('Yakin ingin menghapus barang ini? (Tindakan ini tidak bisa dibatalkan)')) return;
     try {
@@ -153,6 +174,7 @@ export default function BarangPage() {
     if (page < totalPages) loadData(page + 1, search, filterKategori, filterKondisi);
   };
 
+  // Variabel pengecekan Hak Akses: Hanya admin/operator yang bisa tambah/edit, dan HANYA admin yang bisa hapus
   const canEdit = user?.role === 'admin' || user?.role === 'operator';
   const canDelete = user?.role === 'admin';
 
@@ -357,6 +379,14 @@ export default function BarangPage() {
                   <option value="rusak_ringan">Rusak Ringan</option>
                   <option value="rusak_berat">Rusak Berat</option>
                 </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Lokasi</label>
+                <input type="text" required
+                  value={formData.lokasi} onChange={(e) => setFormData({...formData, lokasi: e.target.value})}
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/50 focus:bg-white focus:ring-2 focus:ring-primary-500/50 outline-none"
+                />
               </div>
 
               <div>

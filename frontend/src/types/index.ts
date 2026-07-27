@@ -24,6 +24,7 @@ export interface Barang {
   kategori_id: number;
   nama_kategori?: string; // Dari hasil JOIN
   kondisi: 'baik' | 'rusak_ringan' | 'rusak_berat';
+  lokasi: string;
   jumlah: number;
   foto: string | null;
   foto_url?: string | null;

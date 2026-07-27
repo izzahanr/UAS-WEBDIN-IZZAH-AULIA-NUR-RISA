@@ -1,13 +1,16 @@
-Sistem Informasi Inventaris Laboratorium Komputer
-
+# Sistem Informasi Inventaris Laboratorium Komputer
 Proyek ini adalah tugas **UAS Pemrograman Web Dinamis**. Sistem ini dibangun dengan arsitektur **Full-Stack (Terpisah Backend & Frontend)** menggunakan arsitektur RESTful API.
 
 **Nama:** Izzah Aulia Nur Risa (NIM: 0102523029)  
 **Program Studi:** Informatika / Universitas Al Azhar Indonesia
 
+---
+
 ## Teknologi yang Digunakan
 - **Backend**: Node.js, Express.js, TypeScript, MySQL2 (Raw Query / Prepared Statements), JSON Web Token (JWT), Multer.
 - **Frontend**: React, Next.js (App Router), Tailwind CSS v4.
+
+---
 
 ## 1. Cara Instalasi
 
@@ -55,7 +58,7 @@ JWT_SECRET=rahasia_super_aman_untuk_jwt_token_inventaris
 ```
 
 
-##3. Cara Menjalankan Backend & Frontend
+## 3. Cara Menjalankan Backend & Frontend
 
 Anda perlu membuka **dua terminal** terpisah di VS Code.
 
